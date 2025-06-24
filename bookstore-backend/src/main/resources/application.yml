@@ -1,7 +1,7 @@
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/bookstore?useSSL=false&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://aws-mysql.bookstore.rds.amazonaws.com:3306/bookstore?useSSL=false&serverTimezone=Asia/Seoul
     username: root
     password: kim0821pg
   jpa:
