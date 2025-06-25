@@ -58,6 +58,10 @@ cd ~/bookstore/bookstore-backend
 mvn clean install
 mvn spring-boot:run
 
+DB접속(테이블생성)
+sudo mysql -u root -p
+CREATE DATABASE bookstore CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
 6. 프론트엔드 환경 구성 (React + TypeScript)
 bash
 npx create-react-app bookstore-frontend
