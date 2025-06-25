@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# 📚 Bookstore 프로젝트 설치 및 실행 가이드
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+이 문서는 WSL(Windows Subsystem for Linux) 환경에서 **Bookstore 웹 애플리케이션**을 구축하고 실행하는 과정을 설명합니다.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ✅ 환경
+- Windows 10 이상
+- Ubuntu 18.04 (WSL 2)
+- Java 11
+- MySQL Server
+- Spring Boot + React (TypeScript)
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. WSL 및 Ubuntu 18.04 설치
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+PowerShell에서 아래 명령어를 입력하여 Ubuntu 18.04를 설치합니다:
 
-### `npm test`
+bash
+wsl --install -d Ubuntu-18.04
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. MySQL 서버 설치 및 실행
 
-### `npm run build`
+bash
+sudo apt update
+sudo apt install mysql-server
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+WSL은 systemd를 지원하지 않기 때문에 수동으로 MySQL을 시작해야 합니다:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+bash
+sudo service mysql start      # MySQL 시작
+sudo service mysql status     # MySQL 상태 확인
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. SSH 서버 설치 및 실행 (옵션: WinSCP 연동 등)
 
-### `npm run eject`
+bash
+sudo apt update
+sudo apt install openssh-server
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+SSH 데몬 수동 실행 (필요 시):
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+bash
+sudo mkdir -p /run/sshd
+sudo chmod 755 /run/sshd
+sudo /usr/sbin/sshd
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. Java 11 설치
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+bash
+sudo apt update
+sudo apt install openjdk-11-jdk
 
-## Learn More
+5. 백엔드 실행 (Spring Boot)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+bash
+cd ~/bookstore/bookstore-backend
+mvn clean install
+mvn spring-boot:run
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+6. 프론트엔드 환경 구성 (React + TypeScript)
+bash
+npx create-react-app bookstore-frontend
+cd bookstore-frontend
 
-### Code Splitting
+# 필수 라이브러리 설치
+npm install axios react-router-dom bootstrap
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# TypeScript 관련 타입 설치
+npm install --save typescript @types/react @types/react-dom @types/react-router-dom
 
-### Analyzing the Bundle Size
+💡 기타 팁
+프론트엔드 개발 시 npm start로 개발 서버 실행
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+API CORS 설정이 되어 있어야 백엔드와 통신 가능
 
-### Making a Progressive Web App
+MySQL 접속은 mysql -u root -p 명령어 사용
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+📦 프로젝트 구조 예시
+bookstore/
+├── bookstore-backend/   # Spring Boot 백엔드
+└── bookstore-frontend/  # React 프론트엔드
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
