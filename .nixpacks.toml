@@ -1,0 +1,9 @@
+[phases.setup]
+nixPkgs = ["openjdk11"]
+
+[phases.build]
+cmds = ["./mvnw clean package"]
+
+[start]
+cmd = "java -jar target/*.jar"
+

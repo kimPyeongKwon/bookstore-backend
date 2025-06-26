@@ -1,0 +1,13 @@
+
+services:
+  - type: web
+    name: bookstore-backend
+    env: java
+    buildCommand: ./mvnw clean package
+    startCommand: java -jar target/*.jar
+    plan: free
+    build:
+      envVars:
+        - key: JAVA_VERSION
+          value: 11
+
