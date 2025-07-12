@@ -20,6 +20,8 @@ PowerShell에서 아래 명령어를 입력하여 Ubuntu 18.04를 설치합니�
 bash
 wsl --install -d Ubuntu-18.04
 
+(hostname -I,,,IP address확인)
+
 2. MySQL 서버 설치 및 실행
 
 bash
@@ -61,11 +63,19 @@ mvn spring-boot:run
 DB접속(테이블생성)
 sudo mysql -u root -p
 CREATE DATABASE bookstore CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+show databases;
+USE bookstore;
+show tables;
 
 6. 프론트엔드 환경 구성 (React + TypeScript)
 bash
 npx create-react-app bookstore-frontend
 cd bookstore-frontend
+npm start
+
+브라우저에서 http://localhost:3000 접속 → 목록 확인 및 도서 등록 가능	
+백엔드 서버는 http://localhost:8080 에서 실행되어야 합니다.		
+localhost:8080/api/books,,,			json정보	
 
 # 필수 라이브러리 설치
 npm install axios react-router-dom bootstrap
